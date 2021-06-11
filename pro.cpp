@@ -2,7 +2,8 @@
 using namespace std;
 
 int main(){
-	int num = 2;
-	cout<<num<<endl;
+	int A = 2;
+	cout<<A<<endl;
+	cout<<" new line added"<<endl;
 	return 0;
 }
