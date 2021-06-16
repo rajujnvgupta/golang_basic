@@ -1,3 +1,3 @@
 # tutorial
 git demonstration 
-merging into same rep
+merging into same file
