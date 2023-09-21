@@ -1,0 +1,40 @@
+model
+  schema 1.1
+type user
+type file
+  relations
+    define parent_folder: [folder]
+    define viewer: [user] or editor or viewer from parent_folder
+    define editor: [user] or editor from parent_folder
+    define can_view: viewer but not closed
+    define can_edit: editor but not closed
+	define closed: [user, user:*] or closed from parent_folder
+
+type folder
+  relations
+    define associated_group: [folder_groups]
+    define parent: [folder]
+    define viewer: [user] or editor or viewer from associated_group or editor from associated_group or viewer from parent
+    define editor: [user] or editor from associated_group or editor from parent
+    define user_list_pattern_access: user_list_pattern_access from associated_group or user_list_pattern_access from parent
+    define can_view: viewer but not closed
+    define can_edit: editor but not closed
+    define can_list: user_list_pattern_access but not closed
+    define closed: [user,user:*] or closed from parent
+
+type user_groups
+  relations
+    define programmer: [user] and user_in_context
+    define lead: [user] and user_in_context
+    define manager: [user] and user_in_context
+    define user_in_context: [user]
+    define member: [user] 
+
+type folder_groups
+  relations
+    define viewer: [user,user_groups#programmer,user_groups#lead,user_groups#manager] or editor
+    define editor: [user,user_groups#programmer,user_groups#lead,user_groups#manager]
+    define user_list_pattern_access: [user,user_groups#manager]
+    define can_view: viewer
+    define can_edit: editor
+    define can_list: user_list_pattern_access

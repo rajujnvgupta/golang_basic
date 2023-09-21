@@ -1,0 +1,30 @@
+#command to get latest docker image
+docker pull openfga/openfga
+docker run -p 8080:8080 -p 8081:8081 -p 3000:3000 openfga/openfga run 
+openfga/openfga:latest
+
+
+#to run OpenFGA and Postgres in containers. The first thing we should do is create a new network as this will make communication between containers
+#docker network create openfga
+#
+## start postgres in the network you created
+#docker run -d --name postgres --network=openfga -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=password postgres:14
+#
+##migrate command to create table
+#docker run --rm --network=openfga openfga/openfga migrate --datastore-engine postgres --datastore-uri "postgres://postgres:password@postgres:5432/postgres?sslmode=disable"
+#
+##finally start OpenFGA server
+#docker run --name openfga --network=openfga -p 3000:3000 -p 8080:8080 -p 8081:8081 openfga/openfga run --datastore-engine postgres --datastore-uri 'postgres://postgres:password@postgres:5432/postgres?sslmode=disable'
+#
+#
+#run with docker-compose file to skip above command execution
+docker-compose.yaml
+
+docker compose up
+
+
+#########to get into docker image################
+docker ps
+docker exec -it <container_name> bash
+su postgres
+psql

@@ -1,0 +1,18 @@
+../../../go/src/github.com/openfga/go-sdk/credentials/credentials.go:9:5: code in directory /home/raju/go/src/github.com/openfga/go-sdk/oauth2/clientcredentials expects import "golang.org/x/oauth2/clientcredentials"
+
+#added 
+import "golang.org/x/oauth2/clientcredentials" into  
+
+#below curl will create FGA Demo Store
+curl -X POST http://127.0.0.1:8080/stores -H "content-type: application/json" -d '{"name": "FGA Demo Store"}'
+
+#list docker images
+docker ps
+
+
+notes:
+
+while adding tuple from playground without double quotes
+User:   user:anne 
+Relation: writer
+Object:   document:Z
